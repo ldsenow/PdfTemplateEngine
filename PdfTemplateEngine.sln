@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfTemplateEngine", "PdfTemplateEngine\PdfTemplateEngine.csproj", "{E0FA31B7-6C95-4B59-AD2F-3F0E80F58CCE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfTemplateEngine.Renderers.Razor", "PdfTemplateEngine.Renderers.Razor\PdfTemplateEngine.Renderers.Razor.csproj", "{749CE55D-CDB5-4567-8C22-59B5051F57A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfTemplateEngine.Templates", "PdfTemplateEngine.Templates\PdfTemplateEngine.Templates.csproj", "{3C1EDB53-93C9-496B-AF1F-515B8F54FF21}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfTemplateEngine.Examples.Api", "PdfTemplateEngine.Examples.Api\PdfTemplateEngine.Examples.Api.csproj", "{A224D6BD-BDE2-4BE9-9211-CD2E587C3BBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfTemplateEngine.Generators.Playwright", "PdfTemplateEngine.Generators.Playwright\PdfTemplateEngine.Generators.Playwright.csproj", "{C50A3A14-25AE-4D89-9BA1-CD33D78F48FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0FA31B7-6C95-4B59-AD2F-3F0E80F58CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0FA31B7-6C95-4B59-AD2F-3F0E80F58CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0FA31B7-6C95-4B59-AD2F-3F0E80F58CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0FA31B7-6C95-4B59-AD2F-3F0E80F58CCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{749CE55D-CDB5-4567-8C22-59B5051F57A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{749CE55D-CDB5-4567-8C22-59B5051F57A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{749CE55D-CDB5-4567-8C22-59B5051F57A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{749CE55D-CDB5-4567-8C22-59B5051F57A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C1EDB53-93C9-496B-AF1F-515B8F54FF21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1EDB53-93C9-496B-AF1F-515B8F54FF21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1EDB53-93C9-496B-AF1F-515B8F54FF21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1EDB53-93C9-496B-AF1F-515B8F54FF21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A224D6BD-BDE2-4BE9-9211-CD2E587C3BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A224D6BD-BDE2-4BE9-9211-CD2E587C3BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A224D6BD-BDE2-4BE9-9211-CD2E587C3BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A224D6BD-BDE2-4BE9-9211-CD2E587C3BBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C50A3A14-25AE-4D89-9BA1-CD33D78F48FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C50A3A14-25AE-4D89-9BA1-CD33D78F48FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C50A3A14-25AE-4D89-9BA1-CD33D78F48FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C50A3A14-25AE-4D89-9BA1-CD33D78F48FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {084AFFAD-7CE8-465B-93CC-EBA1D21209D5}
+	EndGlobalSection
+EndGlobal

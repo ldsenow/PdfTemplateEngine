@@ -1,0 +1,6 @@
+@PdfTemplateEngine.Examples.Api_HostAddress = https://localhost:7272
+
+GET {{PdfTemplateEngine.Examples.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
