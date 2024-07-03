@@ -1,6 +1,5 @@
 ﻿using Microsoft.Playwright;
 using System.Collections.Concurrent;
-using System.Net.Http;
 
 namespace PdfTemplateEngine.Generators.Playwright;
 

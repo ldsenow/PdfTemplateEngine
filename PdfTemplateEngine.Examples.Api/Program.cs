@@ -28,14 +28,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var summaries = new[]
-{
-"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
 app.MapGet("/render-pdf", async (IPdfGenerator pdfGenerator) =>
 {
-    var pdfBytes = await pdfGenerator.Generate<SampleComponent, SampleComponentModel>(new SampleComponentModel { Text = "Hello, world!" });
+    var pdfBytes = await pdfGenerator.Generate<SampleComponent, SampleComponentModel>(new SampleComponentModel
+    {
+        Text = "Hello, world!"
+    });
 
     return Results.File(
         fileDownloadName: $"output_{DateTime.Now.Ticks}.pdf",
@@ -46,15 +44,13 @@ app.MapGet("/render-pdf", async (IPdfGenerator pdfGenerator) =>
 
 app.MapGet("/render-html", async (IPdfRenderer renderer) =>
 {
-    var html = await renderer.Render<SampleComponent, SampleComponentModel>(new SampleComponentModel { Text = "Hello, world!" });
+    var html = await renderer.Render<SampleComponent, SampleComponentModel>(new SampleComponentModel
+    {
+        Text = "Hello, world!"
+    });
 
     return Results.Content(html, contentType: "text/html");
 })
 .WithOpenApi();
 
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
