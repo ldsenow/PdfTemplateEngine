@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using PdfTemplateEngine;
 using PdfTemplateEngine.Examples.Api;
 using PdfTemplateEngine.Templates;
@@ -47,12 +48,11 @@ app.MapGet("/render-pdf", async (IPdfGenerator pdfGenerator) =>
 })
 .WithOpenApi();
 
-app.MapGet("/render-html", async (IPdfRenderer renderer) =>
+app.MapGet("/render-html", async (
+    [AsParameters] SampleComponentModel model, 
+    [FromServices] IPdfRenderer renderer) =>
 {
-    var html = await renderer.Render<SampleComponent, SampleComponentModel>(new SampleComponentModel
-    {
-        Text = "Hello, world!"
-    });
+    var html = await renderer.Render<SampleComponent, SampleComponentModel>(model);
 
     return Results.Content(html, contentType: "text/html");
 })
