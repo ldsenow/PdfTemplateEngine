@@ -11,11 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddLogging();
 
+builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddScoped<HtmlRenderer>();
 builder.Services.AddScoped<IPdfGenerator, PlaywrightPdfGenerator>();
 builder.Services.AddScoped<IPdfRenderer, RazorPdfRenderer>();
-builder.Services.AddSingleton<IPlaywrightInstanceManager>(new PlaywrightInstanceManager(minInstances: 1, maxInstances: 5));
+builder.Services.AddSingleton<IPlaywrightInstanceManager>(sp =>
+    new PlaywrightInstanceManager(sp.GetRequiredService<TimeProvider>()));
 
 builder.Services.AddHostedService<PlaywrightBrowserInstanceHostedService>();
 

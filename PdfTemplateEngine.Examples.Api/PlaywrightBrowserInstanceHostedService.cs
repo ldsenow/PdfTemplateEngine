@@ -9,7 +9,7 @@ public class PlaywrightBrowserInstanceHostedService(IPlaywrightInstanceManager p
 
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        await playwrightInstanceManager.InitializeAsync();
+        await playwrightInstanceManager.Initialize();
     }
 
     public async Task StopAsync(CancellationToken cancellationToken)
