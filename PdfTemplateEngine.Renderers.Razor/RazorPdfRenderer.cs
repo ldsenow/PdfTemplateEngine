@@ -13,15 +13,14 @@ public class RazorPdfRenderer(HtmlRenderer htmlRenderer) : IPdfRenderer
         where TTemplate : IPdfTemplate<TModel>
         where TModel : class
     {
-        if (model == null)
-            throw new ArgumentNullException(nameof(model));
+        ArgumentNullException.ThrowIfNull(model);
 
         if (!typeof(TTemplate).IsSubclassOf(typeof(PdfTemplateBase<TModel>)))
             throw new InvalidOperationException($"The template must inherit from {nameof(PdfTemplateBase<TModel>)}");
 
         var parameters = ParameterView.FromDictionary(new Dictionary<string, object?>
         {
-            { "Model", model }
+            { nameof(PdfTemplateBase<TModel>.Model), model }
         });
 
         var html = await RenderComponent<TTemplate, TModel>(parameters);
@@ -52,7 +51,7 @@ public class RazorPdfRenderer(HtmlRenderer htmlRenderer) : IPdfRenderer
 
         public Task SetParametersAsync(ParameterView parameters)
         {
-            Model = parameters.GetValueOrDefault<TModel>("Model");
+            Model = parameters.GetValueOrDefault<TModel>(nameof(Model));
             _renderHandle.Render(BuildRenderTree);
             return Task.CompletedTask;
         }
@@ -69,7 +68,7 @@ public class RazorPdfRenderer(HtmlRenderer htmlRenderer) : IPdfRenderer
                 builder.AddAttribute(1, "Body", (RenderFragment)(bodyBuilder =>
                 {
                     bodyBuilder.OpenComponent(0, componentType);
-                    bodyBuilder.AddAttribute(1, "Model", Model);
+                    bodyBuilder.AddAttribute(1, nameof(Model), Model);
                     bodyBuilder.CloseComponent();
                 }));
                 builder.CloseComponent();
@@ -77,7 +76,7 @@ public class RazorPdfRenderer(HtmlRenderer htmlRenderer) : IPdfRenderer
             else
             {
                 builder.OpenComponent(0, componentType);
-                builder.AddAttribute(1, "Model", Model);
+                builder.AddAttribute(1, nameof(Model), Model);
                 builder.CloseComponent();
             }
         }

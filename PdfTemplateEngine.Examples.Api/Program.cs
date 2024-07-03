@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.Components.Web;
 using PdfTemplateEngine;
 using PdfTemplateEngine.Examples.Api;
-using PdfTemplateEngine.Generators.Playwright;
-using PdfTemplateEngine.Renderers.Razor;
 using PdfTemplateEngine.Templates;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,13 +11,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddLogging();
 
 builder.Services.AddSingleton(TimeProvider.System);
-builder.Services.AddScoped<HtmlRenderer>();
-builder.Services.AddScoped<IPdfGenerator, PlaywrightPdfGenerator>();
-builder.Services.AddScoped<IPdfRenderer, RazorPdfRenderer>();
-builder.Services.AddSingleton<IPlaywrightInstanceManager>(sp =>
-    new PlaywrightInstanceManager(sp.GetRequiredService<TimeProvider>()));
-
 builder.Services.AddHostedService<PlaywrightBrowserInstanceHostedService>();
+
+builder.Services.AddPdfTemplateEngine(config =>
+{
+    config.UseRazorRenderer();
+    config.UsePlaywrightGenerator(options =>
+    {
+        options.MinInstances = 1;
+        options.MaxInstances = 5;
+        options.IdleTimeoutMinutes = 30;
+    });
+});
 
 var app = builder.Build();
 
