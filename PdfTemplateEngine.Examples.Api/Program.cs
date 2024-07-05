@@ -34,12 +34,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapGet("/render-pdf", async (IPdfGenerator pdfGenerator) =>
+app.MapGet("/render-pdf", async ([FromQuery] string text, [FromServices] IPdfGenerator pdfGenerator) =>
 {
-    var pdfBytes = await pdfGenerator.Generate<SampleComponent, SampleComponentModel>(new SampleComponentModel
-    {
-        Text = "Hello, world!"
-    });
+    var model = GetModel(text);
+
+    var pdfBytes = await pdfGenerator.Generate<SampleComponent, SampleComponentModel>(model);
 
     return Results.File(
         fileDownloadName: $"output_{DateTime.Now.Ticks}.pdf",
@@ -49,9 +48,11 @@ app.MapGet("/render-pdf", async (IPdfGenerator pdfGenerator) =>
 .WithOpenApi();
 
 app.MapGet("/render-html", async (
-    [AsParameters] SampleComponentModel model, 
+    [FromQuery] string text,
     [FromServices] IPdfRenderer renderer) =>
 {
+    var model = GetModel(text);
+
     var html = await renderer.Render<SampleComponent, SampleComponentModel>(model);
 
     return Results.Content(html, contentType: "text/html");
@@ -59,3 +60,25 @@ app.MapGet("/render-html", async (
 .WithOpenApi();
 
 app.Run();
+
+static SampleComponentModel GetModel(string text) => new()
+{
+    Text = text,
+    Rows = [
+        new TableRow
+        {
+            Description = "Principal for Order #75761",
+            Date = "1 Jul 2024",
+            Amount = "3,100.00",
+            Outstanding = "2,500.00"
+        },
+        new TableRow
+        {
+            Description = "Principal for Order #75762",
+            Date = "3 Jul 2024",
+            Amount = "23,650.00",
+            Outstanding = "23,650.00"
+        }
+    ],
+    TotalOutstanding = "26,150.00"
+};

@@ -13,21 +13,27 @@ public class PlaywrightPdfGenerator(IPlaywrightInstanceManager playwrightInstanc
 
         var browser = await playwrightInstanceManager.GetAvailableBrowserInstance();
 
-        var context = await browser.NewContextAsync();
-
-        var page = await context.NewPageAsync();
-
-        await page.SetContentAsync(html);
-
-        var pdfBytes = await page.PdfAsync(new()
+        try
         {
-            Format = "A4",
-            Margin = new() { Top = "0cm", Right = "0cm", Bottom = "0cm", Left = "0cm" },
-            PrintBackground = true,
-        });
 
-        await playwrightInstanceManager.ReleaseBrowserInstance(browser);
+            var context = await browser.NewContextAsync();
 
-        return pdfBytes;
+            var page = await context.NewPageAsync();
+
+            await page.SetContentAsync(html);
+
+            var pdfBytes = await page.PdfAsync(new()
+            {
+                Format = "A4",
+                Margin = new() { Top = "0cm", Right = "0cm", Bottom = "0cm", Left = "0cm" },
+                PrintBackground = true,
+            });
+
+            return pdfBytes;
+        }
+        finally
+        {
+            await playwrightInstanceManager.ReleaseBrowserInstance(browser);
+        }
     }
 }

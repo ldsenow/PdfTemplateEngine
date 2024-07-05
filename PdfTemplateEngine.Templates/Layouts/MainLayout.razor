@@ -47,6 +47,10 @@
             break-inside: avoid;
         }
 
+        .page {
+            padding: 1cm;
+        }
+
         .page-break-before {
             page-break-before: always;
         }
@@ -59,9 +63,14 @@
             page-break-inside: avoid;
         }
     </style>
+    <style>
+        .t-right {
+            text-align: right;
+        }
+    </style>
 </head>
 
-<body>
+<body class="page">
     @Body
 </body>
 

@@ -50,6 +50,7 @@ public class PlaywrightInstanceManager : IPlaywrightInstanceManager
             {
                 var browser = await CreateBrowserInstance();
                 _browserPool.TryAdd(browser, GetUtcNow());
+                _currentInstances++;
             }
 
             _isInitialized = true;
