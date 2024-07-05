@@ -11,22 +11,21 @@
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         html {
             display: flex;
             justify-content: center;
             width: 100%;
-            height: 100%;
-            background: #cecece;
+            background-color: #cecece;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             width: 210mm;
-            height: 297mm;
             margin: 0;
-            padding: 0;
+            padding: 1cm;
             font-size: 12pt;
             background-color: white;
             color: black;
@@ -34,8 +33,26 @@
             line-height: 1.5;
         }
 
-        @@page {
-            size: A4;
+        @@media print {
+            html {
+                background-color: white;
+            }
+
+            body {
+                padding: 0;
+            }
+        }
+
+        @@media print {
+            @@page {
+                size: A4;
+                margin: 1cm;
+
+                /* wishing it works, however, it is not supported by major browsers */
+                @@bottom-center {
+                    content: counter(page) '/' counter(pages);
+                }
+            }
         }
 
         a {
@@ -43,12 +60,8 @@
             color: #007bff;
         }
 
-        table, img, svg {
-            break-inside: avoid;
-        }
-
-        .page {
-            padding: 1cm;
+        img, svg, figure {
+            page-break-inside: avoid;
         }
 
         .page-break-before {
@@ -70,7 +83,7 @@
     </style>
 </head>
 
-<body class="page">
+<body>
     @Body
 </body>
 

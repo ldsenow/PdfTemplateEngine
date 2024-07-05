@@ -14,6 +14,10 @@
         width: 100%;
     }
 
+        .styled-table tfoot {
+            display: table-row-group
+        }
+
         .styled-table thead tr {
             background-color: #009879;
             color: #ffffff;
@@ -23,6 +27,7 @@
         .styled-table th,
         .styled-table td {
             padding: 12px 15px;
+            vertical-align: top;
         }
 
         .styled-table tbody tr {
@@ -51,9 +56,9 @@
     <thead>
         <tr>
             <th>Description</th>
-            <th>Date</th>
-            <th class="t-right">Amount</th>
-            <th class="t-right">Outstanding</th>
+            <th style="width: 125px">Date</th>
+            <th style="width: 150px" class="t-right">Amount</th>
+            <th style="width: 150px" class="t-right">Outstanding</th>
         </tr>
     </thead>
     <tbody>

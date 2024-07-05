@@ -61,24 +61,22 @@ app.MapGet("/render-html", async (
 
 app.Run();
 
-static SampleComponentModel GetModel(string text) => new()
+static SampleComponentModel GetModel(string text)
 {
-    Text = text,
-    Rows = [
-        new TableRow
+    (int Id, decimal OutstandingAmount)[] records = Enumerable.Range(1, 100)
+        .Select(x => (70000 + x, Random.Shared.Next(10_000, 1_000_000) / 100m))
+        .ToArray();
+
+    return new()
+    {
+        Text = text,
+        Rows = records.Select(x => new TableRow
         {
-            Description = "Principal for Order #75761",
-            Date = "1 Jul 2024",
-            Amount = "3,100.00",
-            Outstanding = "2,500.00"
-        },
-        new TableRow
-        {
-            Description = "Principal for Order #75762",
-            Date = "3 Jul 2024",
-            Amount = "23,650.00",
-            Outstanding = "23,650.00"
-        }
-    ],
-    TotalOutstanding = "26,150.00"
-};
+            Description = $"Principal for Order #{x.Id}",
+            Date = DateTime.Now.AddDays(-Random.Shared.Next(1, 30)).ToString("dd MMM yyyy"),
+            Amount = (x.OutstandingAmount + Random.Shared.Next(1, 10_000)).ToString("N2"),
+            Outstanding = x.OutstandingAmount.ToString("N2")
+        }).ToArray(),
+        TotalOutstanding = records.Sum(x => x.OutstandingAmount).ToString("N2")
+    };
+}
